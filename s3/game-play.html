@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <!-- 文字エンコードをUTF-8に指定 -->
     <meta charset="utf-8">
     <!-- レンダリングを最新に指定 -->
@@ -15,24 +16,69 @@
     <!-- Vue.js を読み込む -->
     <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
 
+
     <!-- 共通のCSSファイルを読み込む -->
     <link rel="stylesheet" href="./common/style.css">
-  </head>
-  <body>
-    <!-- Vue.jsで読み込む -->
-    <div id="app">
+</head>
 
-      <div class="ui main container">
-        <!-- 基本的なコンテンツはここに記載する -->
-        <h1>Smart Poker</h1>
-        <p>これからテキサスホールデムを始めます。ベットするチャンスは4回以上、その都度、賭け金も上がる激熱な展開が待っています。ゲームを続けるか、降りるか、選択はあなた次第です。最終的には、決められたラウンド数で一番多くチップを持っているあなたが勝者です。</p>
-      </div>
+<body>
+    <!-- Vue.jsで読み込む -->
+    <div id="app2">
+
+        <div class="ui main container">
+            <!-- 基本的なコンテンツはここに記載する -->
+            <h1>Smart Poker</h1>
+            <h2>ラウンド{{round}} <br>
+                {{bettingRound[br]}}
+                <br>{{winComment}}</h2>
+            <div>{{order}} の順です。</div>
+            <div>ディーラーは{{dealer}}です。</div>
+            <div>{{turn}}の番です。</div>
+            <div>
+                <form @submit.prevent="submit">
+                    <select v-model="selectActionValue">
+                        <option v-for="(label,id) in selectActionOptions" :value="id">{{ label }}</option>
+                    </select>
+                    <br>
+                    <label for="bet">ベット額</label><br>
+                    <input type="number" v-model="pay">
+                    <div>
+                        <button type="submit">アクション</button>
+                        <br>{{this.comment}}
+                    </div>
+                </form>
+            </div>
+            <v-ons-button @click="nextBr">次に進む</v-ons-button>
+            <br>
+            <modal name="winner-modal">
+                <div style="margin-left:100px">
+                    <select v-model="selectWinnerValue">
+                        <option v-for=" (player,index) in players" :value="index+1">{{ player.name }}</option>
+                    </select>
+                    <br>
+                    <br>
+                    <v-ons-button @click="winner">winner</v-ons-button>
+                </div>
+            </modal>
+
+            <br>
+            <div>ポット{{pot}}</div>
+            <i>
+                <ul v-for="item of players" v-bind:key="players.name" style="float:left">
+                    <li>{{ item.name }}.{{item.isfold}}</li>
+                    <li>ベット : {{item.bet}}</li><i>チップ: {{item.chip}}</i>
+                </ul>
+            </i>
+        </div>
 
     </div>
 
     <!-- APIのURLを読み込むJavaScriptファイル -->
     <script src="./common/config.js" charset="utf-8"></script>
+    <script src="./common/main.js" charset="utf-8"></script>
+    <script src="./common/store.js" charset="utf-8"></script>
     <!-- 各ページで使うJavaScriptファイルはこの行より下で読み込む -->
-    <script src="./js/template.js" charset="utf-8"></script>
-  </body>
+    <script src="./js/game-play.js" charset="utf-8"></script>
+</body>
+
 </html>
