@@ -1,4 +1,4 @@
-import page1 from './page1.vue'
+// import page1 from './game-set.js'
 
 var vm = new Vue({
     el: "#app2", // Vue.jsを使うタグのIDを指定
@@ -43,16 +43,16 @@ var vm = new Vue({
         //プレイヤー設定
         for (let i = 0; i < this.player; i++) {
             let j = 'P' + (i + 1);
-            let addPlayer = { 'name': j, 'chip': this.chip, 'bet': 0, 'isfold': 0 }
-            this.players.push(addPlayer)
+            let addPlayer = { 'name': j, 'chip': this.chip, 'bet': 0, 'isfold': 0 };
+            this.players.push(addPlayer);
         }
         //席順
         for (let i = this.players.length - 1; i >= 0; i--) {
             let rand = Math.floor(Math.random() * (i + 1));
-            [this.players[i], this.players[rand]] = [this.players[rand], this.players[i]]
+            [this.players[i], this.players[rand]] = [this.players[rand], this.players[i]];
         }
         //席順の出力
-        let q = 0
+        let q = 0;
         for (let item in this.players) {
             this.order = this.order + this.players[item]['name'] + ',';
             q++;
@@ -85,15 +85,15 @@ var vm = new Vue({
                 //アクション
                 this.action = this.selectActionOptions[this.selectActionValue];
                 switch (this.action) {
-                    case 'ベット': this.betting(); break;
-                    case 'コール': this.call(); break;
-                    case 'レイズ': this.raise(); break;
-                    case 'チェック': this.check(); break;
-                    case 'フォールド': this.fold(); break;
-                    case 'オールイン': this.allIn(); break;
+                case 'ベット': this.betting(); break;
+                case 'コール': this.call(); break;
+                case 'レイズ': this.raise(); break;
+                case 'チェック': this.check(); break;
+                case 'フォールド': this.fold(); break;
+                case 'オールイン': this.allIn(); break;
                 }
             } else {
-                this.comment = '所持しているチップ数を超えています'
+                this.comment = '所持しているチップ数を超えています';
             }
 
         },
@@ -143,7 +143,7 @@ var vm = new Vue({
             }
         },
         check() {
-            console.log('チェック')
+            console.log('チェック');
             if (this.players[this.p % this.players.length].bet == Math.max.apply(null, this.players.map(function (o) { return o.bet; }))) {
                 this.checkCount++;
                 console.log(this.checkCount);
@@ -176,14 +176,14 @@ var vm = new Vue({
             if (this.selectWinnerValue != '') {
                 this.selectWinnerValue = this.selectWinnerValue - 1;
                 this.players[this.selectWinnerValue].chip = this.players[this.selectWinnerValue].chip + this.pot;
-                this.winComment = this.players[this.selectWinnerValue].name + 'さんが勝ちました'
+                this.winComment = this.players[this.selectWinnerValue].name + 'さんが勝ちました';
                 this.selectWinnerValue = '';
                 this.$modal.hide('winner-modal');
                 this.nextRound();
             }
         },
         nextTurn() {
-            this.comment = ''
+            this.comment = '';
             this.p++;
             //フォールドした人を飛ばす
             while (this.players[this.p % this.players.length].isfold == 1) {
@@ -196,9 +196,9 @@ var vm = new Vue({
                     this.players[i].bet = 0;
                 }
                 this.pot = this.pot + Number(this.allBet);
-                this.allBet = 0
+                this.allBet = 0;
                 this.players[this.p % this.players.length].chip = this.players[this.p % this.players.length].chip + this.pot;
-                this.winComment = this.players[this.p % this.players.length].name + 'さんが勝ちました'
+                this.winComment = this.players[this.p % this.players.length].name + 'さんが勝ちました';
                 this.nextRound();
                 //順番を回す
             } else {
@@ -214,12 +214,12 @@ var vm = new Vue({
                     this.players[i].bet = 0;
                 }
                 this.pot = this.pot + Number(this.allBet);
-                this.allBet = 0
+                this.allBet = 0;
                 this.checkCount = 0;
                 //ベッティングラウンドを進める
                 this.br = this.br + 1;
                 console.log(this.bettingRound[this.br]);
-                this.p = (this.round) % this.players.length
+                this.p = (this.round) % this.players.length;
                 while (this.players[this.p].isfold == 1) {
                     this.p++;
                 }
@@ -236,7 +236,7 @@ var vm = new Vue({
             if (this.round < this.maxRound) {
                 this.pot = 0;
                 this.round += 1;
-                this.br = 0
+                this.br = 0;
                 this.playing = this.players.length;
                 this.dealer = this.players[(this.round - 1) % this.players.length].name;
                 for (let i = 0; i < this.players.length; i++) {
@@ -253,7 +253,7 @@ var vm = new Vue({
                 this.sbbb();
             } else {
                 this.players.chip.sort();
-                let q = 0
+                let q = 0;
                 for (let item in this.players) {
                     this.order = this.order + this.players[item]['name'] + ',';
                     q++;

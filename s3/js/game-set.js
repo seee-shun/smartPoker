@@ -1,5 +1,5 @@
-import page2 from './page2.vue'
-var vm = new Vue({
+// import page2 from './game-play.js'
+export default{
     el: "#app", // Vue.jsを使うタグのIDを指定
     data() {
         return {
@@ -19,4 +19,4 @@ var vm = new Vue({
             this.$store.commit("navigator/push", page2);
         }
     }
-});
+};
