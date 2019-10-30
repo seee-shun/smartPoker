@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <!-- 文字エンコードをUTF-8に指定 -->
     <meta charset="utf-8">
     <!-- レンダリングを最新に指定 -->
@@ -17,33 +18,35 @@
 
     <!-- 共通のCSSファイルを読み込む -->
     <link rel="stylesheet" href="./common/style.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <!-- Vue.jsで読み込む -->
     <div id="app">
 
-      <div class="ui main container">
-        <!-- 基本的なコンテンツはここに記載する -->
-        <h1>Smart Poker</h1>
-        <p>これからテキサスホールデムを始めます。ベットするチャンスは4回以上、その都度、賭け金も上がる激熱な展開が待っています。ゲームを続けるか、降りるか、選択はあなた次第です。最終的には、決められたラウンド数で一番多くチップを持っているあなたが勝者です。</p>
-      </div>
-        <div>
-          <h2>ゲーム設定</h2>
-          <form @submit.prevent="submit">
-            <label for="player">プレイヤー数</label>
-            <div><input type="number" v-model="player"></div>
-            <label for="maxRound">ラウンド</label>
-            <div><input type="number" v-model="maxRound"></div>
-            <label for="chip">チップ</label>
-            <div><input type="number" v-model="chip"></div>
-            <label for="minbet">最低ベット</label>
-            <div><input type="number" v-model="minBet"></div>
-            <div>
-              <button type="submit">ゲーム開始</button>
-            </div>
-          </form>
-        </div>
-
+        <template>
+            <v-ons-page>
+                <h1>Smart Poker</h1>
+                <p>これからテキサスホールデムを始めます。ベットするチャンスは4回以上、その都度、賭け金も上がる激熱な展開が待っています。ゲームを続けるか、降りるか、選択はあなた次第です。最終的には、決められたラウンド数で一番多くチップを持っているあなたが勝者です。
+                </p>
+                <div>
+                    <h2>ゲーム設定</h2>
+                    <form @submit.prevent="submit">
+                        <label for="player">プレイヤー数</label>
+                        <div><input type="number" v-model="player"></div>
+                        <label for="maxRound">ラウンド</label>
+                        <div><input type="number" v-model="maxRound"></div>
+                        <label for="chip">チップ</label>
+                        <div><input type="number" v-model="chip"></div>
+                        <label for="minbet">最低ベット</label>
+                        <div><input type="number" v-model="minBet"></div>
+                        <div>
+                            <button type="submit">ゲーム開始</button>
+                        </div>
+                    </form>
+                </div>
+            </v-ons-page>
+        </template>
 
     </div>
 
@@ -53,5 +56,6 @@
     <script src="./common/store.js" charset="utf-8"></script>
     <!-- 各ページで使うJavaScriptファイルはこの行より下で読み込む -->
     <script src="./js/game-set.js" charset="utf-8"></script>
-  </body>
+</body>
+
 </html>
