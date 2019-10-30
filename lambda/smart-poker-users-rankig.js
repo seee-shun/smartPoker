@@ -44,7 +44,7 @@ exports.handler = (event, context, callback) => {
         //TODO: 全ユーザのpasswordを隠蔽する処理を記述
 
         //TODO: レスポンスボディの設定とコールバックの記述
-        
+        // kun
         })
 };
 
