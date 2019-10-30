@@ -26,7 +26,19 @@
         <!-- 基本的なコンテンツはここに記載する -->
         <h1>Smart Poker</h1>
         <p>これからテキサスホールデムを始めます。ベットするチャンスは4回以上、その都度、賭け金も上がる激熱な展開が待っています。ゲームを続けるか、降りるか、選択はあなた次第です。最終的には、決められたラウンド数で一番多くチップを持っているあなたが勝者です。</p>
-        <button v-on:click="submit">OK</button>
+        <div class="ui segments">
+            <div class="ui segment" v-for="record in records">
+                <h2 class="ui header">
+                    <div class="ui label">
+                        {{record.name0.value}}
+                    </div>
+                    <div class="content">
+                        {{record.point.value}}ポイント
+                    </div>
+                </h2>
+            </div>
+        </div>
+       
       </div>
 
     </div>

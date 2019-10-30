@@ -29,6 +29,7 @@ exports.handler = (event, context, callback) => {
     //dynamo.scan()で全件取得
     kintoneRecord.updateRecordByUpdateKey(APP_ID,updateKey,recordData).then(function(resp){
         response.body = JSON.stringify(resp);
+        callback(null,response);
         return;
             
             
@@ -36,11 +37,14 @@ exports.handler = (event, context, callback) => {
             response.statusCode = 500;
             response.body = JSON.stringify({
                "message": "予期せぬエラーが発生しました"
+               
         });
-    
+        callback(null,response);
+        return;
         //TODO: 全ユーザのpasswordを隠蔽する処理を記述
 
         //TODO: レスポンスボディの設定とコールバックの記述
         
-    
+        })
 };
+
