@@ -9,7 +9,7 @@ var vm = new Vue({
     },
     created: function() {
     // Vue.jsの読み込みが完了したときに実行する処理はここに記述する
-    
+        var log = function(){
         console.log("stay hungry.stay foolish");
         fetch(url + "/ranking", {
         method: "GET"
@@ -32,7 +32,8 @@ var vm = new Vue({
         .catch(function(err) {
         // レスポンスがエラーで返ってきたときの処理はここに記述する
         });
-     
+    }
+    setInterval(log,2000);
     },
     methods: {
     // Vue.jsで使う関数はここで記述する

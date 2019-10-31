@@ -60,7 +60,7 @@ var vm = new Vue({
                         // レスポンスが200番で返ってきたときの処理はここに記述する
                             // localStorage.setItem('token', json.token);
                             localStorage.setItem('groupId', vm.user.groupId);
-                            location.href = "./ranking.html";
+                            location.href = "./index.html";
                         })
                         .catch(function(err) {
                         // レスポンスがエラーで返ってきたときの処理はここに記述する
@@ -101,7 +101,7 @@ var vm = new Vue({
                             // localStorage.setItem('token', json.token);
                             localStorage.setItem('groupId', vm.user.groupId);
                             localStorage.setItem('userId', vm.user.userId);
-                            location.href = "./ranking.html";
+                            location.href = "./index.html";
                         })
                         .catch(function(err) {
                         // レスポンスがエラーで返ってきたときの処理はここに記述する
