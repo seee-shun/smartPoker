@@ -7,7 +7,7 @@ var vm = new Vue({
         toggleText: "新規登録",
         user: {
             groupId: null,
-            password: null,
+            // password: null,
             userId  : [],
         },
         err: null
@@ -36,15 +36,15 @@ var vm = new Vue({
             if (vm.mode == "login") {
                 if (!vm.user.groupId) {
                     vm.err = 'groupIdを入力してください';
-                } else if(!vm.user.password) {
-                    vm.err = 'パスワードを入力してください';
+                // } else if(!vm.user.password) {
+                    // vm.err = 'パスワードを入力してください';
                 } else {
                 // ログイン処理はここに
-                    fetch(url + "/user/login", {
+                    fetch(url + "/login", {
                         method: "POST",
                         body: JSON.stringify({
                             "groupId": vm.user.groupId,
-                            "password": vm.user.password
+                            // "password": vm.user.password
                         })
                     })
                         .then(function(response) {
@@ -58,52 +58,9 @@ var vm = new Vue({
                         })
                         .then(function(json) {
                         // レスポンスが200番で返ってきたときの処理はここに記述する
-                            localStorage.setItem('token', json.token);
+                            // localStorage.setItem('token', json.token);
                             localStorage.setItem('groupId', vm.user.groupId);
-                            fetch(url + "/team/user-and-team/login", {
-                                method: "POST",
-                                body: JSON.stringify({
-                                    "groupId": vm.user.userId
-                                })
-                            })
-                                .then(function(response) {
-                                    if (response.status == 200) {
-                                        return response.json();
-                                    }
-                                    // 200番以外のレスポンスはエラーを投げる
-                                    return response.json().then(function(json) {
-                                        throw new Error(json.message);
-                                    });
-                                })
-                                .then(function(json) {
-                                // レスポンスが200番で返ってきたときの処理はここに記述する
-                                    fetch(url + "/team/user-and-team" +
-                                        "?userId=" + localStorage.getItem("userId"), {
-                                        method: "GET"
-                                    })
-                                        .then(function(response) {
-                                            if (response.status == 200) {
-                                                return response.json();
-                                            }
-                                            // 200番以外のレスポンスはエラーを投げる
-                                            return response.json().then(function(json) {
-                                                throw new Error(json.message);
-                                            });
-                                        })
-                                        .then(function(json) {
-                                        // レスポンスが200番で返ってきたときの処理はここに記述する
-                                            localStorage.setItem('myteamId', json.teamId);
-                                        })
-                                        .catch(function(err) {
-                                        // レスポンスがエラーで返ってきたときの処理はここに記述する
-                                        });
-                                    location.href = "./team.html";
-                                })
-                                .catch(function(err) {
-                                // レスポンスがエラーで返ってきたときの処理はここに記述する
-                                    vm.err = '予期せぬエラーが発生しました';
-                                });
-
+                            location.href = "./ranking.html";
                         })
                         .catch(function(err) {
                         // レスポンスがエラーで返ってきたときの処理はここに記述する
@@ -115,19 +72,19 @@ var vm = new Vue({
             } else if (vm.mode == "signup") {
                 if (!vm.user.groupId) {
                     vm.err = 'groupIdを入力してください';
-                } else if(!vm.user.password) {
-                    vm.err = 'パスワードを入力してください';
+                // } else if(!vm.user.password) {
+                    // vm.err = 'パスワードを入力してください';
                 } else if (!vm.user.userId) {
                     vm.err = 'userIdを入力してください';
                 } 
                 else {
                 // APIにPOSTリクエストを送る
-                    fetch(url + "/user/signup", {
+                    fetch(url + "/signup", {
                         method: "POST",
                         body: JSON.stringify({
                             "groupId": vm.user.groupId,
-                            "password": vm.user.password,
-                            "userId": vm.user.userId,
+                            // "password": vm.user.password,
+                            "userNames": vm.user.userId,
                         })
                     })
                         .then(function(response) {
@@ -141,77 +98,14 @@ var vm = new Vue({
                         })
                         .then(function(json) {
                         // レスポンスが200番で返ってきたときの処理はここに記述する
-                            localStorage.setItem('token', json.token);
+                            // localStorage.setItem('token', json.token);
                             localStorage.setItem('groupId', vm.user.groupId);
                             localStorage.setItem('userId', vm.user.userId);
-                            fetch(url + "/team/user-and-team/signup", {
-                                method: "POST",
-                                body: JSON.stringify({
-                                    "userId": vm.user.userId
-                                })
-                            })
-                                .then(function(response) {
-                                    if (response.status == 200) {
-                                        return response.json();
-                                    }
-                                    // 200番以外のレスポンスはエラーを投げる
-                                    return response.json().then(function(json) {
-                                        throw new Error(json.message);
-                                    });
-                                })
-                                .then(function(json) {
-                                // レスポンスが200番で返ってきたときの処理はここに記述する
-                                    fetch(url + "/team/user-and-team" +
-                                    "?userId=" + localStorage.getItem("userId"), {
-                                        method: "GET"
-                                    })
-                                        .then(function(response) {
-                                            if (response.status == 200) {
-                                                return response.json();
-                                            }
-                                            // 200番以外のレスポンスはエラーを投げる
-                                            return response.json().then(function(json) {
-                                                throw new Error(json.message);
-                                            });
-                                        })
-                                        .then(function(json3) {fetch(url + "/team/user-and-team" +
-                                        "?userId=" + localStorage.getItem("userId"), {
-                                            method: "GET"
-                                        })
-                                            .then(function(response) {
-                                                if (response.status == 200) {
-                                                    return response.json();
-                                                }
-                                                // 200番以外のレスポンスはエラーを投げる
-                                                return response.json().then(function(json) {
-                                                    throw new Error(json.message);
-                                                });
-                                            })
-                                            .then(function(json) {
-                                            // レスポンスが200番で返ってきたときの処理はここに記述する
-                                                localStorage.setItem('myteamId', json.teamId);
-                                            })
-                                            .catch(function(err) {
-                                            // レスポンスがエラーで返ってきたときの処理はここに記述する
-                                            });
-                                        // レスポンスが200番で返ってきたときの処理はここに記述する
-                                        localStorage.setItem('myteamId', json.teamId);
-                                        })
-                                        .catch(function(err) {
-                                        // レスポンスがエラーで返ってきたときの処理はここに記述する
-                                        });
-                                    location.href = "./team.html";
-
-                                })
-                                .catch(function(err) {
-                                // レスポンスがエラーで返ってきたときの処理はここに記述する
-                                    vm.err = '予期せぬエラーが発生しました';
-                                });
-
+                            location.href = "./ranking.html";
                         })
                         .catch(function(err) {
                         // レスポンスがエラーで返ってきたときの処理はここに記述する
-                            vm.err = '予期せぬエラーが発生しました';
+                        vm.err = "予期せぬエラーが発生しました";
                         });
 
 

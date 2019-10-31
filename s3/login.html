@@ -30,26 +30,26 @@
             <div class="field">
                     <div class="ui left icon input">
                       <i class="user icon"></i>
-                      <input type="text" placeholder="GroupId">
+                      <input type="text" placeholder="GroupId" v-model="user.groupId">
                     </div>
             </div>
 
-            <div class="field">
+            <!-- <div class="field"> 
                     <div class="ui left icon input">
                       <i class="lock icon"></i>
                       <input type="password" placeholder="Password">
                     </div>
-            </div>
+            </div>-->
 
             <div class="field" v-if="mode=='signup'">
                     <div class="ui left icon input">
                       <i class="tag icon"></i>
-                      <input type="text" placeholder="UserId">
+                      <input type="text" placeholder="UserId" v-model="user.userId">
                     </div>
             </div>
 
             <li v-if="err" class="err-msg">{{ err }}</li>
-            <button id="green"class="ui huge  brown fluid button" type="submit">
+            <button id="green"class="ui huge black fluid button" type="submit">
                             {{ submitText }}
             </button>
             <br>
