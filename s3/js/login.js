@@ -49,7 +49,6 @@ var vm = new Vue({
                     // } else if(!vm.user.password) {
                     // vm.err = 'パスワードを入力してください';
                 } else {
-                    console.log(415);
                     let that = this;
                     // ログイン処理はここに
                     fetch(this.url + "/login", {
@@ -62,12 +61,10 @@ var vm = new Vue({
                     })
                         .then(function (response) {
                             if (response.status == 200) {
-                                console.log("aaa");
                                 return response.json();
                                 
                             }
                             // 200番以外のレスポンスはエラーを投げる
-                            console.log("bbb");
                             return response.json().then(function (json) {
                                 throw new Error(json.message);
                             });
@@ -90,12 +87,10 @@ var vm = new Vue({
                             method: "GET"
                             })
                             .then(function(response) {
-                                console.log("ccc");
                                 if (response.status == 200) {
                                     return response.json();
                                 }
                                 // 200番以外のレスポンスはエラーを投げる
-                                console.log("ddd");
                                 return response.json().then(function(json) {
                                     throw new Error(json.message);
                                 });
@@ -153,7 +148,6 @@ var vm = new Vue({
                             // レスポンスが200番で返ってきたときの処理はここに記述する
                             // localStorage.setItem('token', json.token);
                             localStorage.setItem('groupId', vm.user.groupId);
-                            // localStorage.setItem('userId', vm.user.users);
                             console.log("新規登録しました"+json)
                             console.log(json);
                             // location.href = "./index.html";
