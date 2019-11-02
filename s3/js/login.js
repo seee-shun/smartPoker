@@ -81,7 +81,7 @@ var vm = new Vue({
                         })
                         .catch(function (err) {
                             // レスポンスがエラーで返ってきたときの処理はここに記述する
-                            vm.err = 'そのgroupIdは登録していません';
+                            vm.err = 'そのgroupIdは登録されていません';
                         });
                         fetch(this.url + "/ranking", {
                             method: "GET"
@@ -150,7 +150,6 @@ var vm = new Vue({
                             localStorage.setItem('groupId', vm.user.groupId);
                             console.log("新規登録しました"+json)
                             console.log(json);
-                            // location.href = "./index.html";
                         })
                         .catch(function (err) {
                             // レスポンスがエラーで返ってきたときの処理はここに記述する
@@ -160,12 +159,10 @@ var vm = new Vue({
                             method: "GET"
                             })
                             .then(function(response) {
-                                console.log("fff");
                                 if (response.status == 200) {
                                     return response.json();
                                 }
                                 // 200番以外のレスポンスはエラーを投げる
-                                console.log("ggg");
                                 return response.json().then(function(json) {
                                     throw new Error(json.message);
                                 });
@@ -178,7 +175,14 @@ var vm = new Vue({
                                 }
                             }
                             localStorage.setItem("recordID",vm.user.recordID);
-                            location.href = "./index.html";
+                            for(let m=0;m<json.records.length;m++){
+                                if(json.records[m].groupId.value == vm.user.groupId){
+                                    vm.err = "そのグループIDはすでに使われています"
+                                    exit;
+                                }
+                            }
+                            location.href = "./index.html"
+                            
                             })
                             .catch(function(err) {
                             // レスポンスがエラーで返ってきたときの処理はここに記述する
