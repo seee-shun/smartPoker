@@ -10,6 +10,8 @@ import store from './store';
 import App from './App';
 
 Vue.config.productionTip = false;
+Vue.prototype.$url = "https://a1gf8dsmmf.execute-api.ap-northeast-1.amazonaws.com/dev";
+
 
 Vue.use(VueOnsen);
 Vue.use(VModal);

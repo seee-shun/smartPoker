@@ -14,7 +14,7 @@ export default new Vuex.Store({
         maxRound: "",
         chip:"",
         minBet: "",
-        players: [],
+        ranking: [],
       },
       mutations: {
         push(state, page) {

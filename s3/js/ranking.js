@@ -26,6 +26,7 @@ var vm = new Vue({
         .then(function(json) {
         // レスポンスが200番で返ってきたときの処理はここに記述する
         console.log(json);
+        
          vm.records = json.records;
          console.log(vm.records);
         })
