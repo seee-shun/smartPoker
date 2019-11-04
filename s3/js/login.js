@@ -7,7 +7,7 @@ var vm = new Vue({
         mode: "login",
         submitText: "ログイン",
         toggleText: "新規登録",
-        form:0,
+        form:3,
         user: {
             groupId: null,
             recordID: null,

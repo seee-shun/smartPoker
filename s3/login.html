@@ -42,7 +42,10 @@
                       <input type="password" placeholder="Password">
                     </div>
             </div>-->
-
+        <div>
+            <button id="add-button" v-on:click="addInputArea()" v-if="mode=='signup'">+</button>
+            <button id="delete-button" v-on:click="deleteInputArea()" v-if="mode=='signup'">-</button>
+        </div>
         <div class="field" v-if="mode=='signup'">
           <div class="ui left icon input">
             <i class="tag icon"></i>
@@ -91,10 +94,7 @@
               <input type="text" placeholder="UserName" v-model="user.user7">
             </div>
           </div>
-          <div>
-            <button id="add-button" v-on:click="addInputArea()" v-if="mode=='signup'">+</button>
-            <button id="delete-button" v-on:click="deleteInputArea()" v-if="mode=='signup'">-</button>
-          </div>
+         
 
       <p v-if="err.username" class="err-msg">※{{ err.username }}</p>
       <button id="green" class="ui huge black fluid button" type="submit">
