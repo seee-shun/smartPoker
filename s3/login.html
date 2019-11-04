@@ -17,7 +17,7 @@
   <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
 
   <!-- 共通のCSSファイルを読み込む -->
-  <!-- <link rel="stylesheet" href="./common/style.css"> -->
+    <link rel="stylesheet" href="./common/style.css"> 
 </head>
 
 <body>
@@ -35,7 +35,7 @@
             <input type="text" placeholder="GroupId" v-model="user.groupId">
           </div>
         </div>
-
+        <p v-if="err.group" class="err-msg">※{{ err.group }}</p>
         <!-- <div class="field"> 
                     <div class="ui left icon input">
                       <i class="lock icon"></i>
@@ -49,51 +49,54 @@
             <input type="text" placeholder="UserName" v-model="user.user0">
           </div>
         </div>
-        <div class="field" v-if="mode=='signup'">
+        <div class="field" v-if="mode=='signup' && form>=1">
           <div class="ui left icon input">
             <i class="tag icon"></i>
             <input type="text" placeholder="UserName" v-model="user.user1">
           </div>
         </div>
-        <div class="field" v-if="mode=='signup'">
+        <div class="field" v-if="mode=='signup' && form>=2">
           <div class="ui left icon input">
             <i class="tag icon"></i>
             <input type="text" placeholder="UserName" v-model="user.user2">
           </div>
         </div>
-        <div class="field" v-if="mode=='signup'">
+        <div class="field" v-if="mode=='signup' && form>=3">
           <div class="ui left icon input">
             <i class="tag icon"></i>
             <input type="text" placeholder="UserName" v-model="user.user3">
           </div>
         </div>
-        <div class="field" v-if="mode=='signup'">
+        <div class="field" v-if="mode=='signup' && form>=4">
           <div class="ui left icon input">
             <i class="tag icon"></i>
             <input type="text" placeholder="UserName" v-model="user.user4">
           </div>
         </div>
-        <div class="field" v-if="mode=='signup'">
+        <div class="field" v-if="mode=='signup' && form>=5">
           <div class="ui left icon input">
             <i class="tag icon"></i>
             <input type="text" placeholder="UserName" v-model="user.user5">
           </div>
         </div>
-        <div class="field" v-if="mode=='signup'">
+        <div class="field" v-if="mode=='signup' && form>=6">
             <div class="ui left icon input">
               <i class="tag icon"></i>
               <input type="text" placeholder="UserName" v-model="user.user6">
             </div>
           </div>
-          <div class="field" v-if="mode=='signup'">
+          <div class="field" v-if="mode=='signup' && form>=7">
             <div class="ui left icon input">
               <i class="tag icon"></i>
               <input type="text" placeholder="UserName" v-model="user.user7">
             </div>
           </div>
-    
+          <div>
+            <button id="add-button" v-on:click="addInputArea()" v-if="mode=='signup'">+</button>
+            <button id="delete-button" v-on:click="deleteInputArea()" v-if="mode=='signup'">-</button>
+          </div>
 
-      <li v-if="err" class="err-msg">{{ err }}</li>
+      <p v-if="err.username" class="err-msg">※{{ err.username }}</p>
       <button id="green" class="ui huge black fluid button" type="submit">
         {{ submitText }}
       </button>
@@ -108,7 +111,8 @@
   <!-- APIのURLを読み込むJavaScriptファイル -->
   <!-- <script src="./common/config.js" charset="utf-8"></script>  -->
   <!-- 各ページで使うJavaScriptファイルはこの行より下で読み込む -->
-  <script src="./js/login.js" charset="utf-8"></script>
+  <script src="./js/login.js" charset="utf-8"></script>  
+
 </body>
 
 </html>
