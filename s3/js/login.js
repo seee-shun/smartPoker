@@ -56,7 +56,7 @@ var vm = new Vue({
         },
         deleteInputArea: function(){
             console.log("no");
-            if(vm.form >= 1 && vm.form <= 7){
+            if(vm.form > 1 && vm.form <= 7){
                 vm.form--;
                 console.log(vm.form);
                 return vm.form;
@@ -148,9 +148,9 @@ var vm = new Vue({
                     let num = vm.user.groupId;
                     let target = Math.abs(num);
                     let checkLength = target.toString().length; 
-                    if(checkLength > 5){
+                    if(checkLength > 3){
                         // localStorage.setItem('groupId', vm.user.groupId); 
-                        console.log("6桁以上を確認しました");
+                        console.log("4桁以上を確認しました");
                         
                         for(var i=0; i<8; i++){
                             this.user.users.push(this.user["user"+i])
@@ -186,7 +186,7 @@ var vm = new Vue({
                                     vm.err.username = "予期せぬエラーが発生しました";
                                 });
                     }else{
-                        vm.err.group = "グループIDは６桁以上で登録できます"
+                        vm.err.group = "グループIDは4桁以上で登録できます"
                         exit;
                     }
                     
@@ -219,7 +219,7 @@ var vm = new Vue({
                                 }
                             }
 
-                            // setTimeout(location.href = "./index.html", 50000);
+                            location.href = "./index.html";
                             })
                             .catch(function(err) {
                             // レスポンスがエラーで返ってきたときの処理はここに記述する

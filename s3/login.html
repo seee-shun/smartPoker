@@ -23,16 +23,20 @@
 <body>
   <!-- Vue.jsで読み込む -->
   <div id="app">
-
+        <br>
+        <br>
+        <br>
     <div class="ui main container">
+    <div class="ui segments">
+    <div class="ui segment wrapper">
       <!-- 基本的なコンテンツはここに記載する -->
       <h1>Smart Poker</h1>
-      <p>これからテキサスホールデムを始めます。ベットするチャンスは4回以上、その都度、賭け金も上がる激熱な展開が待っています。ゲームを続けるか、降りるか、選択はあなた次第です。最終的には、決められたラウンド数で一番多くチップを持っているあなたが勝者です。</p>
+      <p>ベットするチャンスは4回以上、その都度、賭け金も上がる激熱な展開が待っています。ゲームを続けるか、降りるか、選択はあなた次第です。最終的には、決められたラウンド数で一番多くチップを持っているあなたが勝者です。</p>
       <form class="ui large form" v-on:submit.prevent="submit">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" placeholder="グループID（数値６桁以上）" v-model="user.groupId">
+            <input type="text" placeholder="グループID（数値4桁以上）" v-model="user.groupId">
           </div>
         </div>
         <p v-if="err.group" class="err-msg">※{{ err.group }}</p>
@@ -97,14 +101,16 @@
          
 
       <p v-if="err.username" class="err-msg">※{{ err.username }}</p>
-      <button id="green" class="ui huge black fluid button" type="submit">
+      <button id="green" class="ui middle blue fluid button" type="submit">
         {{ submitText }}
       </button>
       <br>
-      <button v-on:click="toggleMode()" id="grey" class="ui huge  brown fluid button" type="submit">
+      <a v-on:click="toggleMode()" id="grey" type="submit">
         {{ toggleText }}
-      </button>
+      </a>
       </form>
+      </div>
+  </div>    
   </div>
   </div>
 
