@@ -32,7 +32,7 @@
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" placeholder="GroupId" v-model="user.groupId">
+            <input type="text" placeholder="グループID（数値６桁以上）" v-model="user.groupId">
           </div>
         </div>
         <p v-if="err.group" class="err-msg">※{{ err.group }}</p>
@@ -49,49 +49,49 @@
         <div class="field" v-if="mode=='signup'">
           <div class="ui left icon input">
             <i class="tag icon"></i>
-            <input type="text" placeholder="UserName" v-model="user.user0">
+            <input type="text" placeholder="ユーザネーム（自由形式）" v-model="user.user0">
           </div>
         </div>
         <div class="field" v-if="mode=='signup' && form>=1">
           <div class="ui left icon input">
             <i class="tag icon"></i>
-            <input type="text" placeholder="UserName" v-model="user.user1">
+            <input type="text" placeholder="ユーザネーム（自由形式）" v-model="user.user1">
           </div>
         </div>
         <div class="field" v-if="mode=='signup' && form>=2">
           <div class="ui left icon input">
             <i class="tag icon"></i>
-            <input type="text" placeholder="UserName" v-model="user.user2">
+            <input type="text" placeholder="ユーザネーム（自由形式）" v-model="user.user2">
           </div>
         </div>
         <div class="field" v-if="mode=='signup' && form>=3">
           <div class="ui left icon input">
             <i class="tag icon"></i>
-            <input type="text" placeholder="UserName" v-model="user.user3">
+            <input type="text" placeholder="ユーザネーム（自由形式）" v-model="user.user3">
           </div>
         </div>
         <div class="field" v-if="mode=='signup' && form>=4">
           <div class="ui left icon input">
             <i class="tag icon"></i>
-            <input type="text" placeholder="UserName" v-model="user.user4">
+            <input type="text" placeholder="ユーザネーム（自由形式）" v-model="user.user4">
           </div>
         </div>
         <div class="field" v-if="mode=='signup' && form>=5">
           <div class="ui left icon input">
             <i class="tag icon"></i>
-            <input type="text" placeholder="UserName" v-model="user.user5">
+            <input type="text" placeholder="ユーザネーム（自由形式）" v-model="user.user5">
           </div>
         </div>
         <div class="field" v-if="mode=='signup' && form>=6">
             <div class="ui left icon input">
               <i class="tag icon"></i>
-              <input type="text" placeholder="UserName" v-model="user.user6">
+              <input type="text" placeholder="ユーザネーム（自由形式）" v-model="user.user6">
             </div>
           </div>
           <div class="field" v-if="mode=='signup' && form>=7">
             <div class="ui left icon input">
               <i class="tag icon"></i>
-              <input type="text" placeholder="UserName" v-model="user.user7">
+              <input type="text" placeholder="ユーザネーム（自由形式）" v-model="user.user7">
             </div>
           </div>
          

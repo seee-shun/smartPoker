@@ -66,7 +66,7 @@ var vm = new Vue({
         submit: function () {
             if (vm.mode == "login") {
                 if (!vm.user.groupId) {
-                    vm.err.group = 'groupIdを入力してください';
+                    vm.err.group = 'グループIDを入力してください';
                     // } else if(!vm.user.password) {
                     // vm.err = 'パスワードを入力してください';
                 } else {
@@ -90,6 +90,9 @@ var vm = new Vue({
                             }
                         }
                         localStorage.setItem("recordID",vm.user.recordID);
+                        
+
+
                         })
                         .catch(function(err) {
                         // レスポンスがエラーで返ってきたときの処理はここに記述する
@@ -124,20 +127,21 @@ var vm = new Vue({
                         })
                         .catch(function (err) {
                             // レスポンスがエラーで返ってきたときの処理はここに記述する
-                            vm.err.group = 'そのgroupIdは登録されていません';
+                            vm.err.group = 'そのグループIDは登録されていません';
                             exit;
                            
                         });
                 }
             } else if (vm.mode == "signup") {
                 if (!vm.user.groupId) {
-                    vm.err.group = 'GroupIdを入力してください';
+                    vm.err.group = 'グループIDを入力してください';
                     // } else if(!vm.user.password) {
                     // vm.err = 'パスワードを入力してください';
                 }else if(isNaN(vm.user.groupId)){
-                    vm.err.group = "GroupIDは数値で入力してください";
-                }else if (!vm.user.user0) {
-                    vm.err.username = '最低一つ以上userIdを入力してください';
+                    vm.err.group = "グループIDは数値で入力してください";
+                }else if (!vm.user.user0 || !vm.user.user1) {
+                    vm.err.username = '最低二人以上のユーザネームを入力してください';
+                    exit;
                 } 
                 else {
                     // APIにPOSTリクエストを送る
@@ -147,45 +151,11 @@ var vm = new Vue({
                     if(checkLength > 5){
                         // localStorage.setItem('groupId', vm.user.groupId); 
                         console.log("6桁以上を確認しました");
-                    }else{
-                        vm.err.group = "GroupIdは６桁以上で登録できます"
-                        exit;
-                    }
-                    let that = this;
-                    fetch(this.url + "/ranking", {
-                        method: "GET"
-                        })
-                        .then(function(response) {
-                            if (response.status == 200) {
-                                return response.json();
-                            }
-                            // 200番以外のレスポンスはエラーを投げる
-                            return response.json().then(function(json) {
-                                throw new Error(json.message);
-                            });
-                        })
-                        .then(function(json) {
-                        // レスポンスが200番で返ってきたときの処理はここに記述する
-                        for(let i=0;i<json.records.length;i++){
-                            if(json.records[i].groupId.value == vm.user.groupId){
-                                vm.user.recordID = json.records[i].recordID.value
-                            }
-                        }
-                        localStorage.setItem("recordID",vm.user.recordID);
-                        for(let m=0;m<json.records.length;m++){
-                            if(json.records[m].groupId.value == vm.user.groupId){
-                                vm.err.group = "そのグループIDはすでに使われています"
-                                exit;
-                            }
-                        }
-                        })
-                        .catch(function(err) {
-                        // レスポンスがエラーで返ってきたときの処理はここに記述する
                         
-                        });
                         for(var i=0; i<8; i++){
                             this.user.users.push(this.user["user"+i])
                         }
+                        let that = this;
                         fetch(this.url + "/signup", {
                                 method: "POST",
                                 body: JSON.stringify({
@@ -208,13 +178,56 @@ var vm = new Vue({
                                     // localStorage.setItem('token', json.token);
                                     // localStorage.setItem('groupId', vm.user.groupId);
                                     console.log(json);
-                                    location.href = "./index.html"
+                                             
+               
                                 })
                                 .catch(function (err) {
                                     // レスポンスがエラーで返ってきたときの処理はここに記述する
                                     vm.err.username = "予期せぬエラーが発生しました";
                                 });
+                    }else{
+                        vm.err.group = "グループIDは６桁以上で登録できます"
+                        exit;
+                    }
                     
+                        fetch(this.url + "/ranking", {
+                            method: "GET"
+                            })
+                            .then(function(response) {
+                                if (response.status == 200) {
+                                    return response.json();
+                                }
+                                // 200番以外のレスポンスはエラーを投げる
+                                return response.json().then(function(json) {
+                                    throw new Error(json.message);
+                                });
+                            })
+                            .then(function(json) {
+                            // レスポンスが200番で返ってきたときの処理はここに記述する
+                            console.log(json);
+                            console.log(vm.user.groupId);
+                            for(let i=0;i<json.records.length;i++){
+                                if(json.records[i].groupId.value == vm.user.groupId){
+                                    vm.user.recordID = json.records[i].recordID.value;
+                                }
+                            }
+                            localStorage.setItem("recordID",vm.user.recordID);
+                            for(let m=0;m<json.records.length;m++){
+                                if(json.records[m].groupId.value == vm.user.groupId){
+                                    vm.err.group = "そのグループIDはすでに使われています";
+                                    exit;
+                                }
+                            }
+
+                            // setTimeout(location.href = "./index.html", 50000);
+                            })
+                            .catch(function(err) {
+                            // レスポンスがエラーで返ってきたときの処理はここに記述する
+                            
+                            });
+                
+           
+
                 }
             }
         }
