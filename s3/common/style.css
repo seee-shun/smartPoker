@@ -3,3 +3,6 @@ body{
     background-color: #000f12;
     /* color: #4295f5; */
 }
+.ui.segment.wrapper{
+    background-color:#F5F5F5;
+}
