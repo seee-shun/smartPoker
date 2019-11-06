@@ -31,7 +31,7 @@
     <div class="ui segment wrapper">
       <!-- 基本的なコンテンツはここに記載する -->
       <h1>Smart Poker</h1>
-      <form class="ui large form" v-on:submit.prevent="submit">
+      <form class="ui large form" v-on:submit.prevent="submit" >
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
@@ -46,8 +46,9 @@
                     </div>
             </div>-->
         <div>
-            <button id="add-button" v-on:click="addInputArea()" v-if="mode=='signup'">+</button>
-            <button id="delete-button" v-on:click="deleteInputArea()" v-if="mode=='signup'">-</button>
+            <p v-if="mode=='signup'">２人から最大８人まで遊ぶことができます。</p>
+            <button id="add-button" v-on:click.prevent="addInputArea()" v-if="mode=='signup'">+</button>
+            <button id="delete-button" v-on:click.prevent="deleteInputArea()" v-if="mode=='signup'">-</button>
         </div>
         <div class="field" v-if="mode=='signup'">
           <div class="ui left icon input">
@@ -99,7 +100,7 @@
           </div>
          
 
-      <p v-if="err.username" class="err-msg">※{{ err.username }}</p>
+      <p v-if="err.username" class="err-msg"　v-if="mode=='signup'">※{{ err.username }}</p>
       <button id="green" class="ui middle blue fluid button" type="submit">
         {{ submitText }}
       </button>
