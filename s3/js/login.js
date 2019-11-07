@@ -2,7 +2,6 @@ var vm = new Vue({
     el: "#app", // Vue.jsを使うタグのIDを指定
     data: {
         // Vue.jsで使う変数はここに記述する
-        url: "https://a1gf8dsmmf.execute-api.ap-northeast-1.amazonaws.com/dev",
 
         mode: "login",
         submitText: "ログイン",
@@ -70,7 +69,7 @@ var vm = new Vue({
                     // } else if(!vm.user.password) {
                     // vm.err = 'パスワードを入力してください';
                 } else {
-                    fetch(this.url + "/ranking", {
+                    fetch(url + "/ranking", {
                         method: "GET"
                         })
                         .then(function(response) {
@@ -100,7 +99,7 @@ var vm = new Vue({
                         });
                     let that = this;
                     // ログイン処理はここに
-                    fetch(this.url + "/login", {
+                    fetch(url + "/login", {
                         method: "POST",
                         // mode: 'cros',
                         body: JSON.stringify({
@@ -151,12 +150,41 @@ var vm = new Vue({
                     if(checkLength > 3){
                         // localStorage.setItem('groupId', vm.user.groupId); 
                         console.log("4桁以上を確認しました");
+                        fetch(url + "/ranking", {
+                            method: "GET"
+                            })
+                            .then(function(response) {
+                                if (response.status == 200) {
+                                    return response.json();
+                                }
+                                // 200番以外のレスポンスはエラーを投げる
+                                return response.json().then(function(json) {
+                                    throw new Error(json.message);
+                                });
+                            })
+                            .then(function(json) {
+                            // レスポンスが200番で返ってきたときの処理はここに記述する
+                            console.log(json);
+                            console.log(vm.user.groupId);
+                            
+                            for(let m=0;m<json.records.length;m++){
+                                if(json.records[m].groupId.value == vm.user.groupId){
+                                    vm.err.group = "そのグループIDはすでに使われています";
+                                    exit;
+                                }
+                            }
                         
+                            })
+                            .catch(function(err) {
+                            // レスポンスがエラーで返ってきたときの処理はここに記述する
+                            
+                            });
+                
                         for(var i=0; i<8; i++){
                             this.user.users.push(this.user["user"+i])
                         }
                         let that = this;
-                        fetch(this.url + "/signup", {
+                        fetch(url + "/signup", {
                                 method: "POST",
                                 body: JSON.stringify({
                                     "groupId": that.user.groupId,
@@ -195,9 +223,9 @@ var vm = new Vue({
                             // 指定ミリ秒間だけループさせる（CPUは常にビジー状態）
                             while (new Date() - startMsec < waitMsec);
                         }
-                    
-                        sleep(1000);
-                        fetch(this.url + "/ranking", {
+          
+                        sleep(1500);
+                        fetch(url + "/ranking", {
                             method: "GET"
                             })
                             .then(function(response) {
@@ -219,13 +247,7 @@ var vm = new Vue({
                                 }
                             }
                             localStorage.setItem("recordID",vm.user.recordID);
-                            for(let m=0;m<json.records.length;m++){
-                                if(json.records[m].groupId.value == vm.user.groupId){
-                                    vm.err.group = "そのグループIDはすでに使われています";
-                                    exit;
-                                }
-                            }
-
+                            
                             location.href = "./index.html";
                             })
                             .catch(function(err) {
