@@ -189,7 +189,14 @@ var vm = new Vue({
                         vm.err.group = "グループIDは4桁以上で登録できます"
                         exit;
                     }
+                        function sleep(waitMsec) {
+                            var startMsec = new Date();
+                        
+                            // 指定ミリ秒間だけループさせる（CPUは常にビジー状態）
+                            while (new Date() - startMsec < waitMsec);
+                        }
                     
+                        sleep(1000);
                         fetch(this.url + "/ranking", {
                             method: "GET"
                             })
