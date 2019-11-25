@@ -224,7 +224,7 @@ var vm = new Vue({
                             while (new Date() - startMsec < waitMsec);
                         }
           
-                        sleep(1500);
+                        sleep(2500);
                         fetch(url + "/ranking", {
                             method: "GET"
                             })
